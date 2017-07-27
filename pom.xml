@@ -35,6 +35,7 @@
         <module>federated-rest</module>
         <module>schema-builder</module>
         <module>slider</module>
+        <module>gaffer-rest-test</module>
     </modules>
 
     <properties>
