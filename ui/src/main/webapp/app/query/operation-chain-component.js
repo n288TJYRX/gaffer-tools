@@ -45,6 +45,69 @@ function OperationChainController(operationChain, config, loading, query, error,
         config.get().then(function(conf) {
             vm.timeConfig = conf.time;
         });
+
+
+        var operation = {
+            selectedOperation: "",
+            expanded: true,
+            fields: {
+                view: {
+                    viewEdges: [],
+                    edgeFilters: {},
+                    viewEntities: [],
+                    entityFilters: {},
+                    namedViews: [],
+                    summarise: true
+                },
+                input: inputFlag ? [] : null,
+                inputPairs: inputFlag ? [] : null,
+                inputB: [],
+                options: null
+            },
+            dates: {
+                startDate: null,
+                endDate: null
+            },
+            previous: previous
+        }
+        var operations = [operationChain.createBlankOperation(),operationChain.createBlankOperation(),operationChain.createBlankOperation()];
+        operationChain.setOperationChain(operations);
+        vm.operations = operationChain.getOperationChain();
+
+        // allow 'op' to be used as a shorthand
+        // if($routeParams.op) {
+        //     $routeParams.operation = $routeParams.op;
+        // }
+
+        // if($routeParams.operation) {
+        //     $routeParams.operation = $routeParams.operation.split(',')
+
+        //     if(Array.isArray($routeParams.operation)) {
+        //         // Add the first operation
+        //         var opFirst = $routeParams.operation[0] 
+        //         var opParam = opFirst.replace(/[\W_]+/g, "").toLowerCase();
+        //         for(var i in vm.availableOperations) {
+        //             if(vm.availableOperations[i].name.replace(/[\W_]+/g, "").toLowerCase() === opParam) {
+        //                 vm.model = vm.availableOperations[i];
+        //                 break;
+        //             }
+        //         }
+
+        //         // Added a new blank operation and fill it
+        //         for (var j = 1; j < $routeParams.operation.length; j++) {
+        //             operationChain.add(false);
+        //             var op = $routeParams.operation[j];
+        //             var opParam = op.replace(/[\W_]+/g, "").toLowerCase();
+        //             for(var i in vm.availableOperations) {
+        //                 if(vm.availableOperations[i].name.replace(/[\W_]+/g, "").toLowerCase() === opParam) {
+        //                     vm.model = vm.availableOperations[i];
+        //                     break;
+        //                 }
+        //             }
+
+        //         }
+        //     }
+        // }        
     }
 
     vm.addOperation = function() {
