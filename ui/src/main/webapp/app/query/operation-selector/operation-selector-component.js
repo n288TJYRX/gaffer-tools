@@ -75,7 +75,7 @@ function operationSelector() {
     }
 }
 
-function OperationSelectorController(operationService, $routeParams, $filter) {
+function OperationSelectorController(operationService, $routeParams, $filter, operationChain) {
     var vm = this;
 
     vm.availableOperations;
@@ -128,11 +128,31 @@ function OperationSelectorController(operationService, $routeParams, $filter) {
         }
 
         if($routeParams.operation) {
-            var opParam = $routeParams.operation.replace(/[\W_]+/g, "").toLowerCase();
-            for(var i in vm.availableOperations) {
-                if(vm.availableOperations[i].name.replace(/[\W_]+/g, "").toLowerCase() === opParam) {
-                    vm.model = vm.availableOperations[i];
-                    break;
+            $routeParams.operation = $routeParams.operation.split(',')
+
+            if(Array.isArray($routeParams.operation)) {
+                // Add the first operation
+                var opFirst = $routeParams.operation[0] 
+                var opParam = opFirst.replace(/[\W_]+/g, "").toLowerCase();
+                for(var i in vm.availableOperations) {
+                    if(vm.availableOperations[i].name.replace(/[\W_]+/g, "").toLowerCase() === opParam) {
+                        vm.model = vm.availableOperations[i];
+                        break;
+                    }
+                }
+
+                // Added a new blank operation and fill it
+                for (var j = 1; j < $routeParams.operation.length; j++) {
+                    operationChain.add(false);
+                    var op = $routeParams.operation[j];
+                    var opParam = op.replace(/[\W_]+/g, "").toLowerCase();
+                    for(var i in vm.availableOperations) {
+                        if(vm.availableOperations[i].name.replace(/[\W_]+/g, "").toLowerCase() === opParam) {
+                            vm.model = vm.availableOperations[i];
+                            break;
+                        }
+                    }
+
                 }
             }
         }
