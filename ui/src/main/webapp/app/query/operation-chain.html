@@ -1,6 +1,6 @@
-<form name="ctrl.operationChainForm">
+<form name="ctrl.operationChainForm" id="operationChainForm" *ngIf="item">
     <div ng-repeat="operation in ctrl.operations" class="operation">
-        <operation model="operation" index="$index" time-config="ctrl.timeConfig" on-delete="ctrl.deleteOperation(index)" on-reset="ctrl.resetOperation(index)" on-execute="ctrl.execute(op)" chain-length="ctrl.operations.length"></operation>
+        <operation model="operation" index="$index" time-config="ctrl.timeConfig" on-delete="ctrl.deleteOperation(index)" on-reset="ctrl.resetOperation(index)" on-execute="ctrl.execute(op)" chain-length="ctrl.operations.length" on-input="ctrl.updateURL()"></operation>
         <div layout="row" layout-align="center" ng-if="ctrl.isNotLast($index)">
             <md-icon md-svg-icon="arrow-downward"></md-icon>
         </div>

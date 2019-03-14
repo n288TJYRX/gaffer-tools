@@ -27,10 +27,11 @@ function operationChainBuilder() {
 }
 
 
-function OperationChainController(operationChain, config, loading, query, error, events, $mdDialog, navigation, $location, $routeParams, operationService, common, graph, types, previousQueries, operationOptions) {
+function OperationChainController(operationChain, config, loading, query, error, events, $mdDialog, navigation, $location, $window, $routeParams, operationService, common, graph, types, previousQueries, operationOptions) {
     var vm = this;
     vm.timeConfig;
     vm.operations = operationChain.getOperationChain();
+    vm.i = 0;
 
     var NAMED_VIEW_CLASS = "uk.gov.gchq.gaffer.data.elementdefinition.view.NamedView";
     var OPERATION_CHAIN_CLASS = "uk.gov.gchq.gaffer.operation.OperationChain";
@@ -44,35 +45,38 @@ function OperationChainController(operationChain, config, loading, query, error,
     vm.$onInit = function() {
         config.get().then(function(conf) {
             vm.timeConfig = conf.time;
+            var operations = [operationChain.createBlankOperation(true),operationChain.createBlankOperation(true),operationChain.createBlankOperation(true)];
+            operationChain.setOperationChain(operations);
+            vm.operations = operationChain.getOperationChain();
         });
 
 
-        var operation = {
-            selectedOperation: "",
-            expanded: true,
-            fields: {
-                view: {
-                    viewEdges: [],
-                    edgeFilters: {},
-                    viewEntities: [],
-                    entityFilters: {},
-                    namedViews: [],
-                    summarise: true
-                },
-                input: inputFlag ? [] : null,
-                inputPairs: inputFlag ? [] : null,
-                inputB: [],
-                options: null
-            },
-            dates: {
-                startDate: null,
-                endDate: null
-            },
-            previous: previous
-        }
-        var operations = [operationChain.createBlankOperation(),operationChain.createBlankOperation(),operationChain.createBlankOperation()];
-        operationChain.setOperationChain(operations);
-        vm.operations = operationChain.getOperationChain();
+        // var operation = {
+        //     selectedOperation: "",
+        //     expanded: true,
+        //     fields: {
+        //         view: {
+        //             viewEdges: [],
+        //             edgeFilters: {},
+        //             viewEntities: [],
+        //             entityFilters: {},
+        //             namedViews: [],
+        //             summarise: true
+        //         },
+        //         input: inputFlag ? [] : null,
+        //         inputPairs: inputFlag ? [] : null,
+        //         inputB: [],
+        //         options: null
+        //     },
+        //     dates: {
+        //         startDate: null,
+        //         endDate: null
+        //     },
+        //     previous: previous
+        // }
+
+
+        
 
         // allow 'op' to be used as a shorthand
         // if($routeParams.op) {
@@ -108,6 +112,30 @@ function OperationChainController(operationChain, config, loading, query, error,
         //         }
         //     }
         // }        
+    }
+
+    var form = document.getElementById('operationChainForm');
+
+    form.addEventListener("input", function(e) {
+        vm.updateURL();
+    })
+
+    vm.updateURL = function() {
+        var operations = operationChain.getOperationChain();
+        var num = vm.i.toString();
+        var newURLEnding = "query?op=test3"+num;
+        $location.url(newURLEnding);
+        $location.replace(); //Appended on the whole URL again replacing the query part http://localhost:8080/ui/#!/http://localhost:8080/ui/#!%2Fquery%3Fop=test3%5Bobject%20Object%5D
+        $window.history.pushState(null, 'any', $location.absUrl());
+        vm.i += 1;
+        
+
+        //window.history.replaceState(null, null, "#!/query?op=test"); //updates url but reloads page
+        //$location.search = "?ops=test2" //doesn't update url but stays on same page
+        //window.history.pushState({urlPath:'/query'},"",'/query?op=test3'); //updates url and then reloads to http://localhost:8080/query?op=test3
+        //$location.search('op',operations[0].selectedOperation.toString()); 
+        //window.history.pushState({page: "another"}, "another page", "example.html"); //updates url but reloads page
+        //window.history.pushState({urlPath:'/ui/#!/query'},"",'/ui/#!/query?op=test3');
     }
 
     vm.addOperation = function() {
