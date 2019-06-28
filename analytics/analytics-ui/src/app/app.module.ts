@@ -15,7 +15,7 @@
  */
 
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms'; // <-- NgModel lives here
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'; // <-- NgModel lives here
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UpgradeModule } from '@angular/upgrade/static';
@@ -34,6 +34,8 @@ import { AnalyticComponent } from './analytic/analytic.component';
 import { NavComponent } from './nav/nav.component';
 import { ParameterFormComponent } from './parameter-form/parameter-form.component';
 import { ParameterInputComponent } from './parameter-input/parameter-input.component';
+import { DynamicFieldDirective } from './components/dynamic-field/dynamic-field.directive';
+import { DynamicFormComponent } from './components/dynamic-form/dynamic-form.component';
 
 import { AnalyticsService } from './gaffer/analytics.service';
 import { ErrorService } from './dynamic-input/error.service';
@@ -53,12 +55,15 @@ import { SchemaService } from './gaffer/schema.service';
     NavComponent,
     TableComponent,
     ParameterFormComponent,
-    ParameterInputComponent
+    ParameterInputComponent,
+    DynamicFieldDirective,
+    DynamicFormComponent
   ],
   imports: [
     BrowserModule,
     UpgradeModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
