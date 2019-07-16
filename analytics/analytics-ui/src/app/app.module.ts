@@ -34,8 +34,6 @@ import { AnalyticComponent } from './analytic/analytic.component';
 import { NavComponent } from './nav/nav.component';
 import { ParameterFormComponent } from './parameter-form/parameter-form.component';
 import { ParameterInputComponent } from './parameter-input/parameter-input.component';
-import { DynamicFieldDirective } from './components/dynamic-field/dynamic-field.directive';
-import { DynamicFormComponent } from './components/dynamic-form/dynamic-form.component';
 
 import { AnalyticsService } from './gaffer/analytics.service';
 import { ErrorService } from './dynamic-input/error.service';
@@ -55,9 +53,7 @@ import { SchemaService } from './gaffer/schema.service';
     NavComponent,
     TableComponent,
     ParameterFormComponent,
-    ParameterInputComponent,
-    DynamicFieldDirective,
-    DynamicFormComponent
+    ParameterInputComponent
   ],
   imports: [
     BrowserModule,

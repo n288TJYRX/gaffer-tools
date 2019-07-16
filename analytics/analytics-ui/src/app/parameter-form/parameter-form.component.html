@@ -2,7 +2,7 @@
   <form name="dynamicInputForm" layout-margin>
     <div fxLayout="column">
       <div *ngFor="let paramArray of parameters; let i = index" flex="noshrink">
-        <div ngSwitch="paramArray[1].inputClass">
+        <div ngSwitch="paramArray[1].userInputType">
           <div *ngSwitchCase="select">
             <!-- Dropdown -->
             <mat-form-field class="example-full-width margin-top" appearance="fill">
@@ -18,7 +18,9 @@
             <!-- Date Picker -->
             <mat-form-field class="example-full-width margin-top" appearance="fill">
               <mat-label>{{paramArray[1].label}}</mat-label>
-              <input matInput [matDatepicker]="picker" name="paramArray[1].name" [placeholder]="paramArray[1].label" />
+              <input matInput [matDatepicker]="picker" name="paramArray[1].name" [placeholder]="paramArray[1].label"
+                [type]="paramArray[1].userInputType" [(value)]="paramArray[1].currentValue"
+                (change)="onChange($event.target.value, parameters[i][0])" />
               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
               <mat-hint></mat-hint>
@@ -35,7 +37,7 @@
             <mat-form-field class="example-full-width margin-top" appearance="fill">
               <mat-label>{{paramArray[1].label}}</mat-label>
               <input matInput name="paramArray[1].name" [placeholder]="paramArray[1].label" id="paramArray[1].label"
-                [type]="paramArray[1].inputClass" [(value)]="paramArray[1].currentValue"
+                [type]="paramArray[1].userInputType" [(value)]="paramArray[1].currentValue"
                 (change)="onChange($event.target.value, parameters[i][0])" />
             </mat-form-field>
           </div>
