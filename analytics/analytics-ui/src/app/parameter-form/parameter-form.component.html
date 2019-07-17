@@ -2,44 +2,44 @@
   <form name="dynamicInputForm" layout-margin>
     <div fxLayout="column">
       <div *ngFor="let paramArray of parameters; let i = index" flex="noshrink">
-        <mat-form-field class="example-full-width margin-top" appearance="fill">
-          <mat-label>{{paramArray[1].label}}</mat-label>
-          <div [ngSwitch]="paramArray[1].userInputType">
+        <div [ngSwitch]="paramArray[1].userInputType">
 
-            <!-- Dropdown -->
-            <div *ngSwitchCase="select">
-              <mat-select [placeholder]="paramArray[1].label" name="paramArray[1].name">
-                <mat-option *ngFor="let item of paramArray[1].options" [value]="item">
-                  {{item}}
-                </mat-option>
-              </mat-select>
+          <!-- Dropdown -->
+          <div *ngSwitchCase="'select'">
+            <mat-select [placeholder]="paramArray[1].label" name="paramArray[1].name">
+              <mat-option *ngFor="let item of paramArray[1].options" [value]="item">
+                {{item}}
+              </mat-option>
+            </mat-select>
+          </div>
+
+          <!-- Date Picker -->
+          <div *ngSwitchCase="'date'">
+            <input matInput [matDatepicker]="picker" name="paramArray[1].name" [placeholder]="paramArray[1].label"
+              [(value)]="paramArray[1].currentValue" (change)="onChange($event.target.value, parameters[i][0])" />
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </div>
+
+          <!-- Checkbox -->
+          <div *ngSwitchCase="'boolean'">
+            <div class="demo-full-width margin-top">
+              <mat-checkbox matInput formControlName="paramArray[1].name" (change)="onChange($event, parameters[i][0])">
+                {{paramArray[1].label}}</mat-checkbox>
             </div>
+          </div>
 
-            <!-- Date Picker -->
-            <div *ngSwitchCase="'date'">
-              <input matInput [matDatepicker]="picker" name="paramArray[1].name" [placeholder]="paramArray[1].label"
-                [(value)]="paramArray[1].currentValue" (change)="onChange($event.target.value, parameters[i][0])" />
-              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-              <mat-datepicker #picker></mat-datepicker>
-            </div>
-
-            <!-- Checkbox -->
-            <div *ngSwitchCase="'boolean'">
-              <div class="demo-full-width margin-top">
-                <mat-checkbox formControlName="paramArray[1].name" [(value)]="paramArray[1].currentValue"
-                  (change)="onChange($event.target.value, parameters[i][0])">{{paramArray[1].label}}</mat-checkbox>
-              </div>
-            </div>
-
-            <!-- Standard Input -->
-            <div *ngSwitchDefault>
+          <!-- Standard Input -->
+          <div *ngSwitchDefault>
+            <mat-form-field class="example-full-width margin-top" appearance="fill">
+              <mat-label>{{paramArray[1].label}}</mat-label>
               <input matInput name="paramArray[1].name" [placeholder]="paramArray[1].label" id="paramArray[1].label"
                 [type]="paramArray[1].userInputType" [(value)]="paramArray[1].currentValue"
                 (change)="onChange($event.target.value, parameters[i][0])" />
-            </div>
-
+            </mat-form-field>
           </div>
-        </mat-form-field>
+
+        </div>
       </div>
     </div>
   </form>
