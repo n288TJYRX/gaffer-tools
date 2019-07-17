@@ -24,9 +24,9 @@ import { AnalyticsService } from '../gaffer/analytics.service';
 export class ParameterFormComponent implements OnInit {
   @Input() parameters;
 
-  constructor(private analyticsService: AnalyticsService) {}
+  constructor(private analyticsService: AnalyticsService) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   /** Update the analytic operation whenever a parameter changes */
   onChange = function(parameter, parameterName) {
