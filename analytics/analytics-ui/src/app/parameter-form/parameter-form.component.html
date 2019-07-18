@@ -30,8 +30,9 @@
           <!-- Checkbox -->
           <div *ngSwitchCase="'boolean'">
             <div class="demo-full-width margin-top">
-              <mat-checkbox name="paramArray[1].name" (change)="onChange($event, parameters[i][0])">
-                {{paramArray[1].label}}</mat-checkbox>
+              <input type="checkbox" name="paramArray[1].name"
+                (change)="onChange($event.target.value, parameters[i][0])" id="paramArray[1].label" [checked]="" />
+              <mat-label>{{paramArray[1].label}}</mat-label>
             </div>
           </div>
 
