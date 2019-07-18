@@ -4,15 +4,13 @@
       <div *ngFor="let paramArray of parameters; let i = index" flex="noshrink">
         <div [ngSwitch]="paramArray[1].userInputType">
 
-          <!-- Dropdown -->
-          <div *ngSwitchCase="'select'">
+          <!-- Iterable -->
+          <div *ngSwitchCase="'Iterable'">
             <mat-form-field class="example-full-width margin-top" appearance="fill">
               <mat-label>{{paramArray[1].label}}</mat-label>
-              <mat-select [placeholder]="paramArray[1].label" name="paramArray[1].name">
-                <mat-option *ngFor="let item of paramArray[1].options" [value]="item">
-                  {{item}}
-                </mat-option>
-              </mat-select>
+              <textarea matInput name="paramArray[1].name" [placeholder]="paramArray[1].label" id="paramArray[1].label"
+                [type]="paramArray[1].userInputType" [(value)]="paramArray[1].currentValue"
+                (change)="onChange($event.target.value, parameters[i][0])"></textarea>
             </mat-form-field>
           </div>
 
