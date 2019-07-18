@@ -82,4 +82,4 @@ import {
     MatRadioModule
   ]
 })
-export class MaterialModule {}
+export class MaterialModule { }

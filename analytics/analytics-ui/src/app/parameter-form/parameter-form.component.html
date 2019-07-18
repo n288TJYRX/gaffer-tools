@@ -2,9 +2,10 @@
   <form name="dynamicInputForm" layout-margin>
     <div fxLayout="column">
       <div *ngFor="let paramArray of parameters; let i = index" flex="noshrink">
-        <div ngSwitch="paramArray[1].inputClass">
-          <div *ngSwitchCase="select">
-            <!-- Dropdown -->
+        <div [ngSwitch]="paramArray[1].userInputType">
+
+          <!-- Dropdown -->
+          <div *ngSwitchCase="'select'">
             <mat-form-field class="example-full-width margin-top" appearance="fill">
               <mat-label>{{paramArray[1].label}}</mat-label>
               <mat-select [placeholder]="paramArray[1].label" name="paramArray[1].name">
@@ -14,31 +15,37 @@
               </mat-select>
             </mat-form-field>
           </div>
-          <div *ngSwitchCase="date">
-            <!-- Date Picker -->
+
+          <!-- Date Picker -->
+          <div *ngSwitchCase="'date'">
             <mat-form-field class="example-full-width margin-top" appearance="fill">
               <mat-label>{{paramArray[1].label}}</mat-label>
-              <input matInput [matDatepicker]="picker" name="paramArray[1].name" [placeholder]="paramArray[1].label" />
+              <input matInput [matDatepicker]="picker" name="paramArray[1].name" [placeholder]="paramArray[1].label"
+                [(value)]="paramArray[1].currentValue" (change)="onChange($event.target.value, parameters[i][0])" />
               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
-              <mat-hint></mat-hint>
             </mat-form-field>
           </div>
-          <div *ngSwitchCase="boolean">
-            <!-- Checkbox -->
+
+          <!-- Checkbox -->
+          <div *ngSwitchCase="'boolean'">
             <div class="demo-full-width margin-top">
-              <mat-checkbox name="paramArray[1].name">{{paramArray[1].label}}</mat-checkbox>
+              <input type="checkbox" name="paramArray[1].name"
+                (change)="onChange($event.target.checked, parameters[i][0])" id="paramArray[1].label" [checked]="" />
+              <mat-label>{{paramArray[1].label}}</mat-label>
             </div>
           </div>
+
+          <!-- Standard Input -->
           <div *ngSwitchDefault>
-            <!-- Standard Input -->
             <mat-form-field class="example-full-width margin-top" appearance="fill">
               <mat-label>{{paramArray[1].label}}</mat-label>
               <input matInput name="paramArray[1].name" [placeholder]="paramArray[1].label" id="paramArray[1].label"
-                [type]="paramArray[1].inputClass" [(value)]="paramArray[1].currentValue"
+                [type]="paramArray[1].userInputType" [(value)]="paramArray[1].currentValue"
                 (change)="onChange($event.target.value, parameters[i][0])" />
             </mat-form-field>
           </div>
+
         </div>
       </div>
     </div>
