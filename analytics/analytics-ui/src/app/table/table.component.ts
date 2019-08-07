@@ -15,12 +15,11 @@
  */
 
 import { Component, OnInit, Injectable, ViewChild } from '@angular/core';
-import { MatSort, MatTableDataSource } from '@angular/material';
+import { MatSort, MatTableDataSource, MatPaginator } from '@angular/material';
 import { cloneDeep, union } from 'lodash';
 
 import { ResultsService } from '../gaffer/results.service';
 import { TypeService } from '../gaffer/type.service';
-import { TimeService } from '../gaffer/time.service';
 import { SchemaService } from '../gaffer/schema.service';
 
 @Component({
@@ -32,6 +31,7 @@ export class TableComponent implements OnInit {
   data = {
     results: new MatTableDataSource([])
   };
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   schema = { edges: {}, entities: {}, types: {} };
   columnsToDisplay;
@@ -39,7 +39,6 @@ export class TableComponent implements OnInit {
   constructor(
     private results: ResultsService,
     private types: TypeService,
-    private time: TimeService,
     private schemaService: SchemaService
   ) { }
 
@@ -72,6 +71,10 @@ export class TableComponent implements OnInit {
 
       this.processResults(sortedResults);
     });
+  }
+
+  ngAfterViewInit() {
+    this.data.results.paginator = this.paginator;
   }
 
   private processResults = function(resultsData) {

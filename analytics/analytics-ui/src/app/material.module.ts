@@ -26,6 +26,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatIconModule } from '@angular/material/icon';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTableModule } from '@angular/material/table';
@@ -42,6 +43,7 @@ import { MatTableModule } from '@angular/material/table';
     MatCardModule,
     MatTabsModule,
     MatIconModule,
+    MatPaginatorModule,
     MatProgressSpinnerModule,
     MatTooltipModule,
     MatTableModule
@@ -57,9 +59,10 @@ import { MatTableModule } from '@angular/material/table';
     MatCardModule,
     MatTabsModule,
     MatIconModule,
+    MatPaginatorModule,
     MatProgressSpinnerModule,
     MatTooltipModule,
     MatTableModule
   ]
 })
-export class MaterialModule {}
+export class MaterialModule { }
