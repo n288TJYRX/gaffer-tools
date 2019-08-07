@@ -15,11 +15,12 @@
  */
 
 import { Component, OnInit, Injectable, ViewChild } from '@angular/core';
-import { MatSort, MatTableDataSource, MatPaginator } from '@angular/material';
+import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { cloneDeep, union } from 'lodash';
 
 import { ResultsService } from '../gaffer/results.service';
 import { TypeService } from '../gaffer/type.service';
+import { TimeService } from '../gaffer/time.service';
 import { SchemaService } from '../gaffer/schema.service';
 
 @Component({
@@ -39,6 +40,7 @@ export class TableComponent implements OnInit {
   constructor(
     private results: ResultsService,
     private types: TypeService,
+    private time: TimeService,
     private schemaService: SchemaService
   ) { }
 
@@ -183,8 +185,7 @@ export class TableComponent implements OnInit {
               const elementDef = this.schema[typePlural][element.group];
               if (elementDef && elementDef.properties) {
                 if (elementDef.groupBy) {
-                  for (const j of elementDef.groupBy) {
-                    const propName = elementDef.groupBy[j];
+                  for (const propName of elementDef.groupBy) {
                     const typeDef = this.schema.types[
                       elementDef.properties[propName]
                     ];

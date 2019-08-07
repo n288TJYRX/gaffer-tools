@@ -17,7 +17,7 @@
 export class ResultsService {
   results = [];
 
-  constructor() { }
+  constructor() {}
 
   /** Get the results */
   get = function() {
