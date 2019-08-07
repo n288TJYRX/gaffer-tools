@@ -77,6 +77,7 @@ export class TableComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.data.results.paginator = this.paginator;
+    this.data.results.sort = this.sort;
   }
 
   private processResults = function(resultsData) {

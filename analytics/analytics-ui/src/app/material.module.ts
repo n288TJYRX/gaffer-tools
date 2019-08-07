@@ -28,6 +28,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatIconModule } from '@angular/material/icon';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSortModule } from '@angular/material/sort';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTableModule } from '@angular/material/table';
 
@@ -45,6 +46,7 @@ import { MatTableModule } from '@angular/material/table';
     MatIconModule,
     MatPaginatorModule,
     MatProgressSpinnerModule,
+    MatSortModule,
     MatTooltipModule,
     MatTableModule
   ],
@@ -61,6 +63,7 @@ import { MatTableModule } from '@angular/material/table';
     MatIconModule,
     MatPaginatorModule,
     MatProgressSpinnerModule,
+    MatSortModule,
     MatTooltipModule,
     MatTableModule
   ]
