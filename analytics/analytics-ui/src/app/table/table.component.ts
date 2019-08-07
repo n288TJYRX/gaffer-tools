@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { Component, OnInit, Injectable, ViewChild } from '@angular/core';
+import { Component, OnInit, Injectable, ViewChild, AfterViewInit } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { cloneDeep, union } from 'lodash';
 
@@ -28,7 +28,7 @@ import { SchemaService } from '../gaffer/schema.service';
   templateUrl: './table.component.html'
 })
 @Injectable()
-export class TableComponent implements OnInit {
+export class TableComponent implements OnInit, AfterViewInit {
   data = {
     results: new MatTableDataSource([])
   };
