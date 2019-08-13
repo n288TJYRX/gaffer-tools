@@ -106,6 +106,8 @@ function SideNavController($route, navigation, operationOptions, config) {
      */
     vm.saveURLParameters = function() {
 
+        console.log('URL hash changed!');
+
         // Get the url parameters
         var params = vm.getRouteParams();
 

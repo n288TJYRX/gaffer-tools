@@ -22,6 +22,8 @@ angular.module('app').factory('navigation', ['$location', 'common', function($lo
 
     var currentPage = $location.path().substr(1);
 
+    var parameters = {};
+
     navigation.getCurrentPage = function() {
         return currentPage;
     }
@@ -57,6 +59,16 @@ angular.module('app').factory('navigation', ['$location', 'common', function($lo
 
     navigation.getCurrentURL = function() {
         return window.location.href;
+    }
+
+    navigation.setOperations = function(operationChain) {
+        var serialisedOpChain = JSON.stringify(operationChain);
+        console.log(serialisedOpChain);
+        var params = {op: serialisedOpChain};
+        var pageName = navigation.getCurrentURL().split('!/')[1].split('?')[0];
+        console.log('pageName is: ', pageName);
+        $location.path('/' + pageName).search(params);
+        console.log('breakpoint here');
     }
 
     return navigation;

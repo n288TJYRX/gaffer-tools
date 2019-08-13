@@ -45,6 +45,9 @@ function OperationChainController(operationChain, config, loading, query, error,
         config.get().then(function(conf) {
             vm.timeConfig = conf.time;
         });
+        var form = document.querySelector('form');
+        form.addEventListener('change', vm.onFormChange);
+        console.log('form is: ',form);
     }
 
     vm.addOperation = function() {
@@ -453,5 +456,15 @@ function OperationChainController(operationChain, config, loading, query, error,
         }
 
         return op;
+    }
+
+    /**
+     * Update the url parameters with the new operation chain when the operation chain is changed.
+     */
+    vm.onFormChange = function() {
+        console.log('The operation chain form changed!');
+        var operations = operationChain.getOperationChain();
+        console.log("model is: ", operations);
+        navigation.setOperations(operations);
     }
 }

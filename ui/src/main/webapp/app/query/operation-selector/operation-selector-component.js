@@ -122,20 +122,22 @@ function OperationSelectorController(operationService, $routeParams, $filter) {
             return 0
         });
 
-        // allow 'op' to be used as a shorthand
-        if($routeParams.op) {
-            $routeParams.operation = $routeParams.op;
-        }
 
-        if($routeParams.operation) {
-            var opParam = $routeParams.operation.replace(/[\W_]+/g, "").toLowerCase();
-            for(var i in vm.availableOperations) {
-                if(vm.availableOperations[i].name.replace(/[\W_]+/g, "").toLowerCase() === opParam) {
-                    vm.model = vm.availableOperations[i];
-                    break;
-                }
-            }
-        }
+        // Extract the operation parameters from the url and set the model
+        // allow 'op' to be used as a shorthand
+        // if($routeParams.op) {
+        //     $routeParams.operation = $routeParams.op;
+        // }
+
+        // if($routeParams.operation) {
+        //     var opParam = $routeParams.operation.replace(/[\W_]+/g, "").toLowerCase();
+        //     for(var i in vm.availableOperations) {
+        //         if(vm.availableOperations[i].name.replace(/[\W_]+/g, "").toLowerCase() === opParam) {
+        //             vm.model = vm.availableOperations[i];
+        //             break;
+        //         }
+        //     }
+        // }
     }
 
     vm.getOperations = function() {
