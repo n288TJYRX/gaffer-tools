@@ -31,6 +31,7 @@ function OperationChainController(operationChain, config, loading, query, error,
     var vm = this;
     vm.timeConfig;
     vm.operations = operationChain.getOperationChain();
+    vm.form = null;
 
     var NAMED_VIEW_CLASS = "uk.gov.gchq.gaffer.data.elementdefinition.view.NamedView";
     var OPERATION_CHAIN_CLASS = "uk.gov.gchq.gaffer.operation.OperationChain";
@@ -45,9 +46,10 @@ function OperationChainController(operationChain, config, loading, query, error,
         config.get().then(function(conf) {
             vm.timeConfig = conf.time;
         });
-        var form = document.querySelector('form');
-        form.addEventListener('change', vm.onFormChange);
-        console.log('form is: ',form);
+        vm.form = document.querySelector('form');
+        vm.form.addEventListener('change', navigation.setOpChainParameters);
+        console.log('form is: ',vm.form);
+        // events.subscribe('operationsUpdated', operationService.onFormChange)
     }
 
     vm.addOperation = function() {
@@ -59,6 +61,9 @@ function OperationChainController(operationChain, config, loading, query, error,
 
     vm.$onDestroy = function() {
         operationChain.setOperationChain(vm.operations);
+        // events.unsubscribe('operationsUpdated', operationService.onFormChange);
+        vm.form.removeEventListener('change', navigation.setOpChainParameters);
+        vm.form = null;
     }
 
     vm.deleteOperation = function(index) {
@@ -455,16 +460,8 @@ function OperationChainController(operationChain, config, loading, query, error,
             op.options = operationOptions.extractOperationOptions(operation.fields.options);
         }
 
-        return op;
-    }
 
-    /**
-     * Update the url parameters with the new operation chain when the operation chain is changed.
-     */
-    vm.onFormChange = function() {
-        console.log('The operation chain form changed!');
-        var operations = operationChain.getOperationChain();
-        console.log("model is: ", operations);
-        navigation.setOperations(operations);
+
+        return op;
     }
 }

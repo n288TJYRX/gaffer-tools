@@ -16,7 +16,7 @@
 
 'use strict';
 
-angular.module('app').factory('navigation', ['$location', 'common', function($location, common) {
+angular.module('app').factory('navigation', ['$location', 'common', 'operationChain', function($location, common, operationChain) {
 
     var navigation = {};
 
@@ -61,14 +61,17 @@ angular.module('app').factory('navigation', ['$location', 'common', function($lo
         return window.location.href;
     }
 
-    navigation.setOperations = function(operationChain) {
-        var serialisedOpChain = JSON.stringify(operationChain);
+    /**
+     * Update the url parameters with the new operation chain when the operation chain is changed.
+     */
+    navigation.setOpChainParameters = function() {
+        var opChain = operationChain.getOperationChain();
+        console.log(opChain);
+        var serialisedOpChain = JSON.stringify(opChain);
         console.log(serialisedOpChain);
-        var params = {op: serialisedOpChain};
+        var params = {op: JSON.stringify(opChain)};
         var pageName = navigation.getCurrentURL().split('!/')[1].split('?')[0];
-        console.log('pageName is: ', pageName);
         $location.path('/' + pageName).search(params);
-        console.log('breakpoint here');
     }
 
     return navigation;

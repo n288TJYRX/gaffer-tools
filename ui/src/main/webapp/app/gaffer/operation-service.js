@@ -16,7 +16,7 @@
 
 'use strict';
 
-angular.module('app').factory('operationService', ['$http', '$q', 'settings', 'config', 'query', 'types', 'common', 'error', 'operationOptions', function($http, $q, settings, config, query, types, common, error, operationOptions) {
+angular.module('app').factory('operationService', ['$http', '$q', 'settings', 'config', 'query', 'types', 'common', 'error', 'operationOptions', 'operationChain', 'navigation', function($http, $q, settings, config, query, types, common, error, operationOptions, operationChain, navigation) {
 
     var operationService = {};
 

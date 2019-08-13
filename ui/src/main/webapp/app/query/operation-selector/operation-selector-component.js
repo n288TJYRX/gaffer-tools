@@ -122,7 +122,6 @@ function OperationSelectorController(operationService, $routeParams, $filter) {
             return 0
         });
 
-
         // Extract the operation parameters from the url and set the model
         // allow 'op' to be used as a shorthand
         // if($routeParams.op) {
@@ -160,5 +159,9 @@ function OperationSelectorController(operationService, $routeParams, $filter) {
             return vm.model.name;
         }
         return "Search for an operation...";
+    }
+
+    vm.onChange = function() {
+        // navigation.setOpChainParameter();
     }
 }
