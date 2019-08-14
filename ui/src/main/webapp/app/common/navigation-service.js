@@ -58,7 +58,7 @@ angular.module('app').factory('navigation', ['$location', 'common', 'operationCh
     }
 
     navigation.getCurrentURL = function() {
-        return window.location.href;
+        return $location.absUrl();
     }
 
     /**
@@ -66,10 +66,26 @@ angular.module('app').factory('navigation', ['$location', 'common', 'operationCh
      */
     navigation.setOpChainParameters = function() {
         var opChain = operationChain.getOperationChain();
-        console.log(opChain);
-        var serialisedOpChain = JSON.stringify(opChain);
-        console.log(serialisedOpChain);
-        var params = {op: JSON.stringify(opChain)};
+        console.log("opChain is: ", opChain);
+        console.log("opChain[0] is: ", opChain[0]);
+        console.log("opChain[0].expanded is:", opChain[0].expanded);
+        console.log("opChain[0].selectedOperation is:", opChain[0].selectedOperation);
+        var serialisedOpChain = JSON.stringify(opChain, function (key, value) {
+            if (value && typeof value === 'object') {
+              var replacement = {};
+              for (var k in value) {
+                if (Object.hasOwnProperty.call(value, k)) {
+                  replacement[k] = value[k];
+                }
+              }
+              return replacement;
+            }
+            return value;
+          });
+        console.log("serialised operation chain: ", serialisedOpChain);
+        console.log("serialisedOpChain[0]: ", JSON.stringify(opChain[0]));
+        var params = {op: "const short test url"};
+        console.log("params are: ", params);
         var pageName = navigation.getCurrentURL().split('!/')[1].split('?')[0];
         $location.path('/' + pageName).search(params);
     }

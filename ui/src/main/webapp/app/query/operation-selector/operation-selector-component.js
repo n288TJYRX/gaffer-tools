@@ -160,8 +160,4 @@ function OperationSelectorController(operationService, $routeParams, $filter) {
         }
         return "Search for an operation...";
     }
-
-    vm.onChange = function() {
-        // navigation.setOpChainParameter();
-    }
 }

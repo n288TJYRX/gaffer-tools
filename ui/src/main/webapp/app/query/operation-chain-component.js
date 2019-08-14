@@ -46,10 +46,16 @@ function OperationChainController(operationChain, config, loading, query, error,
         config.get().then(function(conf) {
             vm.timeConfig = conf.time;
         });
+        console.log('initialising operation chain component!');
         vm.form = document.querySelector('form');
-        vm.form.addEventListener('change', navigation.setOpChainParameters);
+        vm.form.addEventListener('select', vm.saveAndUpdateOpChainParameters);
         console.log('form is: ',vm.form);
         // events.subscribe('operationsUpdated', operationService.onFormChange)
+    }
+
+    vm.saveAndUpdateOpChainParameters = function() {
+        operationChain.setOperationChain(vm.operations);
+        navigation.setOpChainParameters();
     }
 
     vm.addOperation = function() {
@@ -60,9 +66,11 @@ function OperationChainController(operationChain, config, loading, query, error,
     }
 
     vm.$onDestroy = function() {
+
+        console.log('Destroying operation chain component, removing event listeners!');
         operationChain.setOperationChain(vm.operations);
         // events.unsubscribe('operationsUpdated', operationService.onFormChange);
-        vm.form.removeEventListener('change', navigation.setOpChainParameters);
+        vm.form.removeEventListener('change', vm.saveAndUpdateOpChainParameters);
         vm.form = null;
     }
 
