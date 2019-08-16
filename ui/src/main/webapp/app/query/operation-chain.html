@@ -1,4 +1,4 @@
-<form name="ctrl.operationChainForm">
+<form name="ctrl.operationChainForm" id="operation-chain">
     <div ng-repeat="operation in ctrl.operations" class="operation">
         <operation model="operation" index="$index" time-config="ctrl.timeConfig" on-delete="ctrl.deleteOperation(index)" on-reset="ctrl.resetOperation(index)" on-execute="ctrl.execute(op)" chain-length="ctrl.operations.length"></operation>
         <div layout="row" layout-align="center" ng-if="ctrl.isNotLast($index)">

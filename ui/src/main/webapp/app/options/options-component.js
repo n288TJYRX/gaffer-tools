@@ -218,7 +218,7 @@ function OptionsController(operationOptions, config, $q, query, error, navigatio
         operationOptions.setDefaultConfiguration(vm.model);
 
         // Take any graph Ids and update the url parameters
-        var graphIds = null
+        var graphIds = null;
         if (vm.model) {
             vm.model.visible.forEach(function(element) {
                 if (element.key == 'gaffer.federatedstore.operation.graphIds') {
@@ -226,6 +226,6 @@ function OptionsController(operationOptions, config, $q, query, error, navigatio
                 }
             });
         }
-        navigation.updateURL(graphIds)
+        navigation.updateURL(graphIds);
     }
 }

@@ -32,6 +32,9 @@ function OperationChainController(operationChain, config, loading, query, error,
     vm.timeConfig;
     vm.operations = operationChain.getOperationChain();
     vm.form = null;
+    window.onload = function(){
+        console.log("DOM has loaded!");
+    };
 
     var NAMED_VIEW_CLASS = "uk.gov.gchq.gaffer.data.elementdefinition.view.NamedView";
     var OPERATION_CHAIN_CLASS = "uk.gov.gchq.gaffer.operation.OperationChain";
@@ -43,19 +46,19 @@ function OperationChainController(operationChain, config, loading, query, error,
      * initialises the time config and default operation options
      */
     vm.$onInit = function() {
+
         config.get().then(function(conf) {
             vm.timeConfig = conf.time;
         });
-        console.log('initialising operation chain component!');
-        vm.form = document.querySelector('form');
+        vm.form = document.getElementById('operation-chain');
         vm.form.addEventListener('select', vm.saveAndUpdateOpChainParameters);
-        console.log('form is: ',vm.form);
-        // events.subscribe('operationsUpdated', operationService.onFormChange)
     }
 
     vm.saveAndUpdateOpChainParameters = function() {
+        console.log('Form select event fired!');
         operationChain.setOperationChain(vm.operations);
         navigation.setOpChainParameters();
+        // console.log('End of form select event');
     }
 
     vm.addOperation = function() {
@@ -66,12 +69,11 @@ function OperationChainController(operationChain, config, loading, query, error,
     }
 
     vm.$onDestroy = function() {
-
         console.log('Destroying operation chain component, removing event listeners!');
         operationChain.setOperationChain(vm.operations);
         // events.unsubscribe('operationsUpdated', operationService.onFormChange);
-        vm.form.removeEventListener('change', vm.saveAndUpdateOpChainParameters);
-        vm.form = null;
+        // vm.form.removeEventListener('select', vm.saveAndUpdateOpChainParameters);
+        // vm.form = null;
     }
 
     vm.deleteOperation = function(index) {

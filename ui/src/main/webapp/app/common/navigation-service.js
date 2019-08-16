@@ -16,7 +16,7 @@
 
 'use strict';
 
-angular.module('app').factory('navigation', ['$location', 'common', 'operationChain', function($location, common, operationChain) {
+angular.module('app').factory('navigation', ['$location', '$route', 'common', 'operationChain', function($location, $route, common, operationChain) {
 
     var navigation = {};
 
@@ -66,10 +66,10 @@ angular.module('app').factory('navigation', ['$location', 'common', 'operationCh
      */
     navigation.setOpChainParameters = function() {
         var opChain = operationChain.getOperationChain();
-        console.log("opChain is: ", opChain);
-        console.log("opChain[0] is: ", opChain[0]);
-        console.log("opChain[0].expanded is:", opChain[0].expanded);
-        console.log("opChain[0].selectedOperation is:", opChain[0].selectedOperation);
+        // console.log("opChain is: ", opChain);
+        // console.log("opChain[0] is: ", opChain[0]);
+        // console.log("opChain[0].expanded is:", opChain[0].expanded);
+        // console.log("opChain[0].selectedOperation is:", opChain[0].selectedOperation);
         var serialisedOpChain = JSON.stringify(opChain, function (key, value) {
             if (value && typeof value === 'object') {
               var replacement = {};
@@ -82,12 +82,45 @@ angular.module('app').factory('navigation', ['$location', 'common', 'operationCh
             }
             return value;
           });
-        console.log("serialised operation chain: ", serialisedOpChain);
-        console.log("serialisedOpChain[0]: ", JSON.stringify(opChain[0]));
-        var params = {op: "const short test url"};
-        console.log("params are: ", params);
+        // console.log("serialised operation chain: ", serialisedOpChain);
+        // console.log("serialisedOpChain[0]: ", JSON.stringify(opChain[0]));
+        var shortOpChain = [];
+        var op = {};
+        op.class = JSON.stringify(opChain[0].selectedOperation.class).split(".").pop();
+        op.fields = opChain[0].fields;
+        op.dates = opChain[0].dates;
+        shortOpChain.push(op);
+
+        // var params = {op: JSON.stringify(shortOpChain)};
+
+        // console.log("params are: ", params);
         var pageName = navigation.getCurrentURL().split('!/')[1].split('?')[0];
+
+        // var paramString = "?";
+        // Object.keys(params).forEach((key) => {
+        //     paramString += key.toString() +  "=" + params[key].toString();
+        // })
+        // var paramString = "a"
+        // for (var i = 1; i < 20000; i++) {
+        //     paramString += "a";
+        // }
+        // var params = {op: shortOpChain};
+        // var keys = Object.keys(params);
+        // var paramString = "?";
+        // for (var i=0; i < keys.length; i++) {
+        //     paramString += keys[i] + "=" + encodeURIComponent(JSON.stringify(params[keys[i]]).replace(/"/g, "").replace(/\s/g, ''));
+        //     if (i < (keys.length-1)) {
+        //         urljson+="&";
+        //     }
+        // }
+        var paramString = ["testparamstring"];
+        console.log(typeof paramString);
+        console.log("paramString: ", paramString);
+        var params = {op: JSON.stringify(shortOpChain)};
+        // window.history.pushState(null, null, navigation.getCurrentURL() + paramString);
         $location.path('/' + pageName).search(params);
+
+        // [{class:GetAdjacentIds\,fields:{view:{viewEdges:[],edgeFilters:{},viewEntities:[],entityFilters:{},namedViews:[],summarise:true},input:[],inputPairs:[],inputB:[],options:null},dates:{startDate:null,endDate:null}}]
     }
 
     return navigation;
