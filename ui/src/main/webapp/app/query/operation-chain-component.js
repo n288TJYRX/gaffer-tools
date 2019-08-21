@@ -46,12 +46,14 @@ function OperationChainController(operationChain, config, loading, query, error,
      * initialises the time config and default operation options
      */
     vm.$onInit = function() {
-
+        console.log('Initialising the operation chain component');
         config.get().then(function(conf) {
             vm.timeConfig = conf.time;
         });
-        vm.form = document.getElementById('operation-chain');
-        vm.form.addEventListener('select', vm.saveAndUpdateOpChainParameters);
+        // vm.form = document.getElementById('operation-chain');
+        console.log("form before: ", vm.form);
+        // vm.form.addEventListener('select', vm.saveAndUpdateOpChainParameters);
+        console.log("form after: ", vm.form);
     }
 
     vm.saveAndUpdateOpChainParameters = function() {
@@ -69,7 +71,9 @@ function OperationChainController(operationChain, config, loading, query, error,
     }
 
     vm.$onDestroy = function() {
-        console.log('Destroying operation chain component, removing event listeners!');
+        // console.log("caller is " + onDestroy.caller);
+        // console.log("caller is " + arguments.callee.caller.toString());
+        // console.log('Destroying operation chain component, removing event listeners!');
         operationChain.setOperationChain(vm.operations);
         // events.unsubscribe('operationsUpdated', operationService.onFormChange);
         // vm.form.removeEventListener('select', vm.saveAndUpdateOpChainParameters);

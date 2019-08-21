@@ -1,11 +1,13 @@
-<form name="ctrl.operationChainForm" id="operation-chain">
-    <div ng-repeat="operation in ctrl.operations" class="operation">
-        <operation model="operation" index="$index" time-config="ctrl.timeConfig" on-delete="ctrl.deleteOperation(index)" on-reset="ctrl.resetOperation(index)" on-execute="ctrl.execute(op)" chain-length="ctrl.operations.length"></operation>
-        <div layout="row" layout-align="center" ng-if="ctrl.isNotLast($index)">
-            <md-icon md-svg-icon="arrow-downward"></md-icon>
+<div ng-change="ctrl.saveAndUpdateOpChainParameters()">
+    <form name="ctrl.operationChainForm" id="operation-chain" >
+        <div ng-repeat="operation in ctrl.operations" class="operation">
+            <operation model="operation" index="$index" time-config="ctrl.timeConfig" on-delete="ctrl.deleteOperation(index)" on-reset="ctrl.resetOperation(index)" on-execute="ctrl.execute(op)" chain-length="ctrl.operations.length"></operation>
+            <div layout="row" layout-align="center" ng-if="ctrl.isNotLast($index)">
+                <md-icon md-svg-icon="arrow-downward"></md-icon>
+            </div>
         </div>
-    </div>
-</form>
+    </form>
+</div>
 <div layout="row" layout-align="center">
     <md-button class="md-fab md-mini overlapping-fab" ng-click="ctrl.addOperation()">
         <md-icon md-svg-icon="add"></md-icon>

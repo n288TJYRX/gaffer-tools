@@ -113,10 +113,18 @@ angular.module('app').factory('navigation', ['$location', '$route', 'common', 'o
         //         urljson+="&";
         //     }
         // }
-        var paramString = ["testparamstring"];
-        console.log(typeof paramString);
-        console.log("paramString: ", paramString);
-        var params = {op: JSON.stringify(shortOpChain)};
+
+        // var paramString = "?op=testparamstring";
+        // console.log(typeof paramString);
+        // console.log("paramString: ", paramString);
+
+        // shortOpChain = ["someteststring"];
+        // var params = {op: shortOpChain};
+        // console.log("params that work: ", params);
+
+        var params = {op: [JSON.stringify(shortOpChain)[15]]};
+        console.log("params are: ", params);
+        
         // window.history.pushState(null, null, navigation.getCurrentURL() + paramString);
         $location.path('/' + pageName).search(params);
 

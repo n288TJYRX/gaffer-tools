@@ -40,7 +40,7 @@ function SideNavController($route, navigation, operationOptions, config) {
     }
 
     vm.$onDestroy = function() {
-        window.removeEventListener(vm.hashChangeCallback);
+        window.removeEventListener(vm.saveURLParameters);
     }
 
     /**
