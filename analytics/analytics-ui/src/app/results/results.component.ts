@@ -18,6 +18,7 @@ import { Component, OnInit, Injectable, ViewChild, AfterViewInit } from '@angula
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { cloneDeep, union } from 'lodash';
 
+import { AnalyticsService } from '../gaffer/analytics.service';
 import { ResultsService } from '../gaffer/results.service';
 import { TypeService } from '../gaffer/type.service';
 import { TimeService } from '../gaffer/time.service';
@@ -25,59 +26,80 @@ import { SchemaService } from '../gaffer/schema.service';
 
 @Component({
   selector: 'app-table',
-  templateUrl: './table.component.html'
+  templateUrl: './results.component.html'
 })
 @Injectable()
-export class TableComponent implements OnInit, AfterViewInit {
-  data = {
-    results: new MatTableDataSource([])
-  };
+export class ResultsComponent implements OnInit, AfterViewInit {
+  dataSource = new MatTableDataSource([]);
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   schema = { edges: {}, entities: {}, types: {} };
-  columnsToDisplay;
+  outputType = null;
+  tableColumns: string[] = [];
 
   constructor(
+    private analyticsService: AnalyticsService,
     private results: ResultsService,
     private types: TypeService,
     private time: TimeService,
     private schemaService: SchemaService
   ) { }
-
   /**
    * Fetches the results. It first loads the latest types from the config and the latest schema.
    */
   ngOnInit() {
-    this.types.get().subscribe(() => {
-      this.schemaService.get().subscribe(schema => {
-        this.schema = schema;
-      });
-      const sortedResults = {
-        edges: [],
-        entities: [],
-        other: []
-      };
-      const results = this.results.get();
-      const clazz = 'class';
-      const entity = 'Entity';
-      const edge = 'Edge';
-      for (const result of results) {
-        if (result[clazz].split('.').pop() === entity) {
-          sortedResults.entities.push(result);
-        } else if (result[clazz].split('.').pop() === edge) {
-          sortedResults.edges.push(result);
-        } else {
-          sortedResults.other.push(result);
-        }
-      }
+    this.outputType = this.analyticsService.getOutputVisualisationType();
 
-      this.processResults(sortedResults);
-    });
+    if (this.outputType === 'TABLE') {
+      let tableData = this.results.get();
+      if (tableData == null) {
+        return;
+      }
+      // To transform non-object results into objects, we need to build an array of replacements and indexes
+      const toAdd: any[] = [];
+      const toRemove: number[] = [];
+
+      tableData.forEach((element, index) => {
+        if (element instanceof Object) {
+          // Use the keys of objects as the tableColumns
+          for (const key of Object.keys(element)) {
+            if (this.tableColumns.indexOf(key) === -1) {
+              this.tableColumns.push(key);
+            }
+          }
+        } else {
+          toRemove.push(index);
+          toAdd.push({ value: element });
+          if (this.tableColumns.indexOf('value') === -1) {
+            this.tableColumns.push('value');
+          }
+        }
+      });
+
+      // Iterate in reverse order so that the indices of later objects are unaffected
+      toRemove.reverse().forEach(index => {
+        tableData.splice(index, 1);
+      });
+
+      tableData = tableData.concat(toAdd);
+
+      this.dataSource = new MatTableDataSource(tableData);
+      this.dataSource.sort = this.sort;
+    }
   }
 
   ngAfterViewInit() {
-    this.data.results.paginator = this.paginator;
-    this.data.results.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+    if (this.outputType === 'HTML') {
+      const html = this.results.get();
+
+      // Display the icon
+      const htmlContainer: HTMLElement = document.getElementById('htmlContainer');
+      if (htmlContainer) {
+        htmlContainer.innerHTML = html;
+      }
+    }
   }
 
   private processResults = function(resultsData) {

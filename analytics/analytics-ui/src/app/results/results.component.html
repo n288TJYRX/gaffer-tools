@@ -1,5 +1,5 @@
 <div style="margin-left:110px">
-  <h1>Table</h1>
+  <h1>Results</h1>
 </div>
 
 <!-- Dynamic Table -->
@@ -7,16 +7,16 @@
 <mat-card>
   <div class="example-container">
     <mat-table [dataSource]="data.results" matSort>
-      <ng-container [matColumnDef]="column" *ngFor="let column of columnsToDisplay">
+      <ng-container [matColumnDef]="column" *ngFor="let column of tableColumns">
         <mat-header-cell *matHeaderCellDef mat-sort-header>
           <h3>{{ column | uppercase }}</h3>
         </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element[column]}} </mat-cell>
       </ng-container>
 
-      <mat-header-row *matHeaderRowDef="columnsToDisplay;">
+      <mat-header-row *matHeaderRowDef="tableColumns;">
       </mat-header-row>
-      <mat-row *matRowDef="let row; columns: columnsToDisplay;">
+      <mat-row *matRowDef="let row; columns: tableColumns;">
       </mat-row>
     </mat-table>
   </div>
