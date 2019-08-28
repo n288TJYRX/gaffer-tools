@@ -29,7 +29,7 @@ import { SchemaService } from '../gaffer/schema.service';
   templateUrl: './table.component.html'
 })
 @Injectable()
-export class TableComponent implements OnInit {
+export class ResultsComponent implements OnInit {
   columns = new FormControl();
   data = {
     results: new MatTableDataSource([])
