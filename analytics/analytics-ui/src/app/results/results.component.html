@@ -1,5 +1,6 @@
 <div style="margin-left:110px">
   <h1>Results</h1>
+
   <mat-form-field>
     <mat-label>Columns</mat-label>
     <mat-select [(value)]="selected">
@@ -13,21 +14,29 @@
 </div>
 
 <!-- Dynamic Table -->
+<div *ngIf="outputType=='TABLE'" class="container">
+  <div class="spacer"></div>
+  <mat-card>
+    <div class="example-container">
+      <mat-table [dataSource]="dataSource" matSort>
+        <ng-container [matColumnDef]="column" *ngFor="let column of tableColumns">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>
+            <h3>{{ column | uppercase }}</h3>
+          </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element[column]}} </mat-cell>
+        </ng-container>
 
-<mat-card>
-  <div class="example-container">
-    <mat-table [dataSource]="data.results" matSort>
-      <ng-container [matColumnDef]="column" *ngFor="let column of columnsToDisplay">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>
-          <h3>{{ column | uppercase }}</h3>
-        </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element[column]}} </mat-cell>
-      </ng-container>
+        <mat-header-row *matHeaderRowDef="tableColumns; sticky: true">
+        </mat-header-row>
+        <mat-row *matRowDef="let row; columns: tableColumns;">
+        </mat-row>
+      </mat-table>
+    </div>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  </mat-card>
+  <div class="spacer"></div>
+</div>
 
-      <mat-header-row *matHeaderRowDef="columnsToDisplay;">
-      </mat-header-row>
-      <mat-row *matRowDef="let row; columns: columnsToDisplay;">
-      </mat-row>
-    </mat-table>
-  </div>
-</mat-card>
+<!-- HTML -->
+<div *ngIf="outputType=='HTML'" id="htmlContainer" class="container">
+</div>

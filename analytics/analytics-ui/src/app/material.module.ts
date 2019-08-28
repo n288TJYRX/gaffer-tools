@@ -27,8 +27,10 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatIconModule } from '@angular/material/icon';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
+import { MatSortModule } from '@angular/material/sort';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTableModule } from '@angular/material/table';
 
@@ -44,8 +46,10 @@ import { MatTableModule } from '@angular/material/table';
     MatCardModule,
     MatTabsModule,
     MatIconModule,
+    MatPaginatorModule,
     MatProgressSpinnerModule,
     MatSelectModule,
+    MatSortModule,
     MatTooltipModule,
     MatTableModule,
     FormsModule,
@@ -62,8 +66,10 @@ import { MatTableModule } from '@angular/material/table';
     MatCardModule,
     MatTabsModule,
     MatIconModule,
+    MatPaginatorModule,
     MatProgressSpinnerModule,
     MatSelectModule,
+    MatSortModule,
     MatTooltipModule,
     MatTableModule,
     FormsModule,

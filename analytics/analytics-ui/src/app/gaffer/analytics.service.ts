@@ -52,13 +52,17 @@ export class AnalyticsService {
     newValue = parseInt(newValue, 10);
     // Look for the parameter in the list of parameters and set the new current value
     for (const parameterPair of this.arrayAnalytic.uiMapping) {
-        if (parameterPair[0] === parameterName) {
-          parameterPair[1].currentValue = newValue;
-          return;
-        }
+      if (parameterPair[0] === parameterName) {
+        parameterPair[1].currentValue = newValue;
+        return;
+      }
     }
     return;
   };
+
+  getOutputVisualisationType() {
+    return this.arrayAnalytic.outputVisualisation.visualisationType;
+  }
 
   /** Create an analytic with array parameters that can be iterated over */
   createArrayAnalytic = function(analytic) {
