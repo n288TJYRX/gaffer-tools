@@ -5,11 +5,13 @@ import { MaterialModule } from '../material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HtmlComponent } from './html/html.component';
 import { TableComponent } from './table/table.component';
+import { BarComponent } from './bar/bar.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @NgModule({
-  declarations: [ResultsComponent, HtmlComponent, TableComponent],
+  declarations: [ResultsComponent, HtmlComponent, TableComponent, BarComponent],
   imports: [
-    CommonModule, MaterialModule, FlexLayoutModule
+    CommonModule, MaterialModule, FlexLayoutModule, NgxChartsModule
   ]
 })
 export class ResultsModule { }
