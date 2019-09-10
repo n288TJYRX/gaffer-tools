@@ -8,6 +8,15 @@
     TO PARAMETERS
   </button>
 
+  <!--Select Output Visualisation-->
+  <mat-form-field style="margin-left:110px">
+    <mat-label>Select output visualisation</mat-label>
+    <mat-select [(value)]="outputType">
+      <mat-option *ngFor="let option of visualisationOptions" value={{option}}>
+        {{ option }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
 </div>
 
 <!-- Dynamic Table -->
@@ -17,4 +26,4 @@
 <app-html *ngIf="outputType=='HTML'"></app-html>
 
 <!--Bar Chart-->
-<app-bar></app-bar>
+<app-bar *ngIf="outputType=='BAR'"></app-bar>

@@ -27,6 +27,10 @@ export class ResultsComponent implements OnInit {
   outputType;
   selected;
 
+  visualisationOptions = [
+    "TABLE", "HTML", "BAR"
+  ]
+
   constructor(
     private analyticsService: AnalyticsService,
     private location: Location

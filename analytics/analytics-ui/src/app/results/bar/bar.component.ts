@@ -24,9 +24,6 @@ export class BarComponent {
       "value": 7200000
     }
   ];
-  multi: any[];
-
-  view: any[] = [700, 400];
 
   // options
   showXAxis = true;
@@ -41,8 +38,6 @@ export class BarComponent {
   colorScheme = {
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
   };
-
-
 
   onSelect(event) {
     console.log(event);
