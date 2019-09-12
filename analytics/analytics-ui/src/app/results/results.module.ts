@@ -8,9 +8,10 @@ import { TableComponent } from './table/table.component';
 import { BarComponent } from './bar/bar.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { PieComponent } from './pie/pie.component';
+import { LineComponent } from './line/line.component';
 
 @NgModule({
-  declarations: [ResultsComponent, HtmlComponent, TableComponent, BarComponent, PieComponent],
+  declarations: [ResultsComponent, HtmlComponent, TableComponent, BarComponent, PieComponent, LineComponent],
   imports: [
     CommonModule, MaterialModule, FlexLayoutModule, NgxChartsModule
   ]

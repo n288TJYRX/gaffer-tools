@@ -28,7 +28,7 @@ export class ResultsComponent implements OnInit {
   selected;
 
   visualisationOptions = [
-    "TABLE", "HTML", "BAR", "PIE"
+    "TABLE", "HTML", "BAR", "PIE", "LINE"
   ]
 
   constructor(
