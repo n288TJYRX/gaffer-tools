@@ -18,7 +18,7 @@ export class PieComponent {
   yAxisLabel = "Population";
 
   colorScheme = {
-    domain: ["#5AA454"]
+    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
   };
 
   single = [
