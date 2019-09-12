@@ -7,9 +7,10 @@ import { HtmlComponent } from './html/html.component';
 import { TableComponent } from './table/table.component';
 import { BarComponent } from './bar/bar.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { PieComponent } from './pie/pie.component';
 
 @NgModule({
-  declarations: [ResultsComponent, HtmlComponent, TableComponent, BarComponent],
+  declarations: [ResultsComponent, HtmlComponent, TableComponent, BarComponent, PieComponent],
   imports: [
     CommonModule, MaterialModule, FlexLayoutModule, NgxChartsModule
   ]
