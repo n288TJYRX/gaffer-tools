@@ -1,1 +1,22 @@
+mat-card {
+    max-width: 80%;
+    height: auto;
+    margin: 2em auto;
+    text-align: center;
+    display: flex;
+}
+
+app-table>mat-form-field {
+    margin-left: 110px;
+}
+
+app-table>button {
+    margin-left: 30px;
+}
+
+.example-container {
+    height: 400px;
+    width: '100%';
+    overflow: auto;
+}
 

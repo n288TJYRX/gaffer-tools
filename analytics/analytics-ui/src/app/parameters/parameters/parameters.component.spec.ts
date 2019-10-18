@@ -20,10 +20,10 @@ import { MatCardModule, MatProgressSpinnerModule } from '@angular/material';
 import { FormsModule } from '@angular/forms';
 
 import { AnalyticsService } from '../../services/analytics.service';
-import { ParameterInputComponent } from './parameter-input.component';
+import { ParameterInputComponent } from './parameters.component';
 
 @Component({
-  selector: 'app-query',
+  selector: 'app-parameters',
   template: ''
 })
 class MockOperationComponent {
@@ -39,7 +39,7 @@ class AnalyticsServiceStub {
   executeAnalytic = () => { };
 }
 
-describe('ParameterInputComponent', () => {
+describe('ParameterComponent', () => {
   let component: ParameterInputComponent;
   let fixture: ComponentFixture<ParameterInputComponent>;
 

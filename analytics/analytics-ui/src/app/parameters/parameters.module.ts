@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ParameterInputComponent } from './parameter-input/parameter-input.component';
+import { ParameterInputComponent } from './parameters/parameters.component';
 import { ParameterFormComponent } from './parameter-form/parameter-form.component';
 import { OperationComponent } from './operation/operation.component';
 import { MaterialModule } from '../material.module';
