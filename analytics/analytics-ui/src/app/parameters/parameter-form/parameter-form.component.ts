@@ -30,6 +30,12 @@ export class ParameterFormComponent implements OnInit {
 
   /** Update the analytic operation whenever a parameter changes */
   onChange = function(parameter, parameterName) {
+    // Convert date parameters into the right form
+    if (parameter["_d"] instanceof Date) {
+      parameter = parameter["_d"].getFullYear() + '-'
+        + ('0' + (parameter["_d"].getMonth() + 1)).slice(-2) + '-'
+        + ('0' + parameter["_d"].getDate()).slice(-2);
+    }
 
     this.analyticsService.updateAnalytic(parameter, parameterName);
     const analytic = this.analyticsService.getAnalytic();
