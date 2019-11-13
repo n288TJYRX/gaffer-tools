@@ -16,10 +16,7 @@
 
           <!-- Date Picker -->
           <div *ngSwitchCase="'date'">
-            <mat-form-field class="example-full-width margin-top" appearance="fill">
-              <mat-label>{{paramArray[1].label}} Time</mat-label>
-              <!-- time input -->
-            </mat-form-field>
+            <!-- time input -->
             <mat-form-field class="example-full-width margin-top" appearance="fill">
               <mat-label>{{paramArray[1].label}} Date</mat-label>
               <input matInput [matDatepicker]="picker" name="paramArray[1].name" [placeholder]="paramArray[1].label"
@@ -27,10 +24,7 @@
               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
-            <mat-form-field class="example-full-width margin-top" appearance="fill">
-              <mat-label>{{paramArray[1].label}} Timezone</mat-label>
-              <!-- timezone dropdown -->
-            </mat-form-field>
+            <app-timezone></app-timezone>
           </div>
 
           <!-- Checkbox -->

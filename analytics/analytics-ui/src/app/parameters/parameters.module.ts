@@ -20,9 +20,10 @@ import {
 import { ParameterInputComponent } from './parameter-page/parameter-page.component';
 import { ParameterFormComponent } from './parameter-form/parameter-form.component';
 import { OperationComponent } from './operation/operation.component';
+import { TimezoneComponent } from './timezone/timezone.component';
 
 @NgModule({
-  declarations: [ParameterInputComponent, ParameterFormComponent, OperationComponent],
+  declarations: [ParameterInputComponent, ParameterFormComponent, OperationComponent, TimezoneComponent],
   imports: [
     CommonModule,
     FlexLayoutModule,
